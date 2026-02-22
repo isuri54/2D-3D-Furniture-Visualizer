@@ -6,7 +6,12 @@ Project folder structure for HCI coursework (Java Swing).
 
 ```
 src/main/java/com/mycompany/furniturevisualizer/
-src/main/java/com/mycompany/furniturevisualizer/ui/
+├── ui/
+│   └── pages/
+│       ├── LoginPage.java
+│       ├── DashboardPage.java
+│       ├── CatalogPage.java
+│       └── VisualizationPage.java
 src/main/resources/
 src/test/java/
 ```
