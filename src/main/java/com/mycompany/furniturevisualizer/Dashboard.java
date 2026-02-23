@@ -5,62 +5,52 @@ import com.mycompany.furniturevisualizer.ui.pages.DashboardPage;
 import com.mycompany.furniturevisualizer.ui.pages.VisualizationPage;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 public class Dashboard extends JFrame {
 
-    private static final Color ORANGE_PRIMARY = Color.decode("#FF6D00");
-
-    private static final String CARD_HOME = "home";
-    private static final String CARD_CATALOG = "catalog";
-    private static final String CARD_VISUALIZATION = "visualization";
+    public static final String CARD_HOME = "home";
+    public static final String CARD_CATALOG = "catalog";
+    public static final String CARD_VISUALIZATION = "visualization";
 
     private final JPanel cardPanel;
     private final CardLayout cardLayout;
 
     public Dashboard() {
-        setTitle("Dashboard - Furniture Visualizer");
+        setTitle("RoomDesigner Pro");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(900, 600);
-        setMinimumSize(new Dimension(700, 500));
+        setSize(1366, 768);
         setLocationRelativeTo(null);
         getContentPane().setBackground(Color.WHITE);
 
         cardLayout = new CardLayout(0, 0);
         cardPanel = new JPanel(cardLayout);
         cardPanel.setBackground(Color.WHITE);
-        cardPanel.add(new DashboardPage(), CARD_HOME);
-        cardPanel.add(new CatalogPage(), CARD_CATALOG);
-        cardPanel.add(new VisualizationPage(), CARD_VISUALIZATION);
-
-        JPanel nav = new JPanel(new FlowLayout(FlowLayout.LEFT, 12, 12));
-        nav.setBackground(Color.WHITE);
-        nav.setBorder(new EmptyBorder(8, 16, 8, 16));
-
-        JButton btnHome = createNavButton("Dashboard", () -> cardLayout.show(cardPanel, CARD_HOME));
-        JButton btnCatalog = createNavButton("Catalog", () -> cardLayout.show(cardPanel, CARD_CATALOG));
-        JButton btnViz = createNavButton("Visualization", () -> cardLayout.show(cardPanel, CARD_VISUALIZATION));
-
-        nav.add(btnHome);
-        nav.add(btnCatalog);
-        nav.add(btnViz);
+        cardPanel.add(new DashboardPage(this), CARD_HOME);
+        cardPanel.add(new CatalogPage(this), CARD_CATALOG);
+        cardPanel.add(new VisualizationPage(this), CARD_VISUALIZATION);
 
         getContentPane().setLayout(new BorderLayout());
-        getContentPane().add(nav, BorderLayout.NORTH);
         getContentPane().add(cardPanel, BorderLayout.CENTER);
     }
 
-    private JButton createNavButton(String text, Runnable action) {
-        JButton b = new JButton(text);
-        b.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-        b.setForeground(ORANGE_PRIMARY);
-        b.setBackground(Color.WHITE);
-        b.setBorderPainted(false);
-        b.setFocusPainted(false);
-        b.setContentAreaFilled(false);
-        b.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        b.addActionListener(e -> action.run());
-        return b;
+    /** Switch to a card (CARD_HOME, CARD_CATALOG, CARD_VISUALIZATION). */
+    public void showCard(String cardName) {
+        cardLayout.show(cardPanel, cardName);
+    }
+
+    /** Logout: show login and close dashboard. */
+    public void logout() {
+        new LoginForm2().setVisible(true);
+        dispose();
+    }
+
+    public static void main(String[] args) {
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception e) {
+            // ignore
+        }
+        SwingUtilities.invokeLater(() -> new Dashboard().setVisible(true));
     }
 }
