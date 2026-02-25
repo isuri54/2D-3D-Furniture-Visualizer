@@ -2,6 +2,7 @@ package com.mycompany.furniturevisualizer;
 
 import com.mycompany.furniturevisualizer.ui.pages.CatalogPage;
 import com.mycompany.furniturevisualizer.ui.pages.DashboardPage;
+import com.mycompany.furniturevisualizer.ui.pages.RoomSetupPage;
 import com.mycompany.furniturevisualizer.ui.pages.VisualizationPage;
 
 import javax.swing.*;
@@ -11,6 +12,7 @@ public class Dashboard extends JFrame {
 
     public static final String CARD_HOME = "home";
     public static final String CARD_CATALOG = "catalog";
+    public static final String CARD_ROOM_SETUP = "roomSetup";
     public static final String CARD_VISUALIZATION = "visualization";
 
     private final JPanel cardPanel;
@@ -28,6 +30,7 @@ public class Dashboard extends JFrame {
         cardPanel.setBackground(Color.WHITE);
         cardPanel.add(new DashboardPage(this), CARD_HOME);
         cardPanel.add(new CatalogPage(this), CARD_CATALOG);
+        cardPanel.add(new RoomSetupPage(this), CARD_ROOM_SETUP);
         cardPanel.add(new VisualizationPage(this), CARD_VISUALIZATION);
 
         getContentPane().setLayout(new BorderLayout());
@@ -42,6 +45,7 @@ public class Dashboard extends JFrame {
     /** Logout: show login and close dashboard. */
     public void logout() {
         new LoginForm2().setVisible(true);
+        
         dispose();
     }
 

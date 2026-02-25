@@ -180,7 +180,7 @@ public class DashboardPage extends JPanel {
         createCard.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                dashboard.showCard(Dashboard.CARD_VISUALIZATION);
+                dashboard.showCard(Dashboard.CARD_ROOM_SETUP);
             }
         });
 
