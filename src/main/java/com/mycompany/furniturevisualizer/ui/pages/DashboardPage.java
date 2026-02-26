@@ -76,6 +76,17 @@ public class DashboardPage extends JPanel {
         JPanel right = new JPanel(new FlowLayout(FlowLayout.RIGHT, 30, 10));
         right.setBackground(Color.WHITE);
 
+        JLabel addFurniture = new JLabel("🛋 Add Furniture");
+        addFurniture.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        addFurniture.setForeground(ORANGE_PRIMARY);
+        addFurniture.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        addFurniture.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                dashboard.showCard(Dashboard.CARD_MANAGE_FURNITURE);
+            }
+        });
+
         JLabel settings = new JLabel("⚙ Settings");
         settings.setFont(new Font("Segoe UI", Font.BOLD, 14));
         settings.setForeground(TEXT_DARK);
@@ -101,6 +112,7 @@ public class DashboardPage extends JPanel {
             }
         });
 
+        right.add(addFurniture);
         right.add(settings);
         right.add(logout);
         header.add(left, BorderLayout.WEST);

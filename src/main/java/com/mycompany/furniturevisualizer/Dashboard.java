@@ -2,6 +2,7 @@ package com.mycompany.furniturevisualizer;
 
 import com.mycompany.furniturevisualizer.ui.pages.CatalogPage;
 import com.mycompany.furniturevisualizer.ui.pages.DashboardPage;
+import com.mycompany.furniturevisualizer.ui.pages.ManageFurniturePage;
 import com.mycompany.furniturevisualizer.ui.pages.RoomSetupPage;
 import com.mycompany.furniturevisualizer.ui.pages.VisualizationPage;
 
@@ -14,6 +15,7 @@ public class Dashboard extends JFrame {
     public static final String CARD_CATALOG = "catalog";
     public static final String CARD_ROOM_SETUP = "roomSetup";
     public static final String CARD_VISUALIZATION = "visualization";
+    public static final String CARD_MANAGE_FURNITURE = "manageFurniture";
 
     private final JPanel cardPanel;
     private final CardLayout cardLayout;
@@ -32,6 +34,7 @@ public class Dashboard extends JFrame {
         cardPanel.add(new CatalogPage(this), CARD_CATALOG);
         cardPanel.add(new RoomSetupPage(this), CARD_ROOM_SETUP);
         cardPanel.add(new VisualizationPage(this), CARD_VISUALIZATION);
+        cardPanel.add(new ManageFurniturePage(this), CARD_MANAGE_FURNITURE);
 
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(cardPanel, BorderLayout.CENTER);
