@@ -25,7 +25,7 @@ public class DashboardPage extends JPanel {
         setBackground(Color.WHITE);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-        JPanel mainContent = new JPanel();
+        JPanel mainContent = new FullWidthScrollablePanel();
         mainContent.setLayout(new BoxLayout(mainContent, BoxLayout.Y_AXIS));
         mainContent.setBackground(Color.WHITE);
 
@@ -36,6 +36,8 @@ public class DashboardPage extends JPanel {
         JScrollPane scrollPane = new JScrollPane(mainContent);
         scrollPane.setBorder(null);
         scrollPane.getVerticalScrollBar().setUnitIncrement(16);
+        scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
         setLayout(new BorderLayout());
         add(scrollPane, BorderLayout.CENTER);
     }
@@ -94,10 +96,7 @@ public class DashboardPage extends JPanel {
         settings.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                JOptionPane.showMessageDialog(DashboardPage.this,
-                    "Settings will be available here.",
-                    "Settings",
-                    JOptionPane.INFORMATION_MESSAGE);
+                dashboard.showCard(Dashboard.CARD_SETTINGS);
             }
         });
 
@@ -368,5 +367,33 @@ public class DashboardPage extends JPanel {
         card.add(imgLabel);
         card.add(content);
         return card;
+    }
+}
+
+class FullWidthScrollablePanel extends JPanel implements Scrollable {
+
+    @Override
+    public Dimension getPreferredScrollableViewportSize() {
+        return getPreferredSize();
+    }
+
+    @Override
+    public int getScrollableUnitIncrement(Rectangle visibleRect, int orientation, int direction) {
+        return 16;
+    }
+
+    @Override
+    public int getScrollableBlockIncrement(Rectangle visibleRect, int orientation, int direction) {
+        return Math.max(visibleRect.height - 16, 16);
+    }
+
+    @Override
+    public boolean getScrollableTracksViewportWidth() {
+        return true;
+    }
+
+    @Override
+    public boolean getScrollableTracksViewportHeight() {
+        return false;
     }
 }
